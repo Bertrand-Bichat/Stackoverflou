@@ -36,12 +36,11 @@ class ApplicationPolicy
     false
   end
 
-  
-def user_loggedin?
-  user != nil
-end
+  def user_loggedin?
+    user != nil
+  end
 
-class Scope
+  class Scope
     def initialize(user, scope)
       @user = user
       @scope = scope
