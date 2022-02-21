@@ -21,7 +21,9 @@
   <div class="text-left row mb-5">
     <h2 class="ml-3">Les commentaires</h2>
     <% if @messages.empty? %>
-      <p><em>Aucun commentaire</em></p>
+      <div class="col-12">
+        <p><em>Aucun commentaire</em></p>
+      </div>
     <% else %>
       <% @messages.each do |message| %>
         <div class="col-12 border p-3 ml-3">
