@@ -1,0 +1,9 @@
+<%= simple_form_for(topic) do |f| %>
+  <%= f.input :title,
+              required: true,
+              label: 'Titre' %>
+  <%= f.input :description,
+              required: true,
+              label: 'Description' %>
+  <%= f.submit "#{action_name == 'new' ? 'Créer le topic' : 'Modifier' }", class: "btn btn-primary" %>
+<% end %>

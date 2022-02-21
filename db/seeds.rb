@@ -37,7 +37,7 @@ puts "create some messages..."
   Message.create(
     user: User.last,
     topic: Topic.all[i - 1],
-    content: 'Lorem ipsum dolor, sit amet consectetur, adipisicing elit. Consectetur rerum, velit ab dolorem, quisquam natus inventore architecto recusandae provident! Non maiores nam mollitia perferendis veniam totam repudiandae eius a recusandae'
+    content: 'Lorem ipsum'
   )
 end
 

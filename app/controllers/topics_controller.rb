@@ -6,18 +6,21 @@ class TopicsController < ApplicationController
     @topics = policy_scope(Topic).order(id: :asc)
   end
 
-  def show; end
+  def show
+    @message = Message.new
+    @messages = @topic.messages.order(id: :asc)
+  end
 
   def new
-    @topic = Topic.new
+    @topic = authorize Topic.new
   end
 
   def create
-    @topic = Topic.new(topic_params)
+    @topic = authorize Topic.new(topic_params)
     @topic.user = current_user
 
     if @topic.save
-      redirect_to root_path, notice: "Votre topic intitulé '#{@topic.title}' a bien été créé."
+      redirect_to topic_path(@topic), notice: "Votre topic intitulé '#{@topic.title}' a bien été créé."
     else
       render :new
     end
@@ -27,7 +30,7 @@ class TopicsController < ApplicationController
 
   def update
     if @topic.update(topic_params)
-      redirect_to root_path, notice: "Votre topic intitulé '#{@topic.title}' a bien été modifié."
+      redirect_to topic_path(@topic), notice: "Votre topic intitulé '#{@topic.title}' a bien été modifié."
     else
       render :edit
     end
@@ -36,7 +39,7 @@ class TopicsController < ApplicationController
   def destroy
     title = @topic.title
     @topic.destroy
-    redirect_to root_path, notice: "Votre topic intitulé '#{title}' a bien été supprimé."
+    redirect_to topics_path, notice: "Votre topic intitulé '#{title}' a bien été supprimé."
   end
 
   private

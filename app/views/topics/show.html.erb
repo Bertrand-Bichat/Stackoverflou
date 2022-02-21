@@ -1,2 +1,52 @@
-<h1>Topics#show</h1>
-<p>Find me in app/views/topics/show.html.erb</p>
+<div class="container w-100">
+  <p class="mt-5">
+    <%= link_to topics_path, class: "btn btn-primary" do %>
+      <i class="fas fa-chevron-left"></i> Retour
+    <% end %>
+  </p>
+
+  <h1 class="text-left mb-1"><%= @topic.title %></h1>
+  <div class="border p-3 mb-5">
+    <small><em><%= @topic.user.nickname %> - topic créé le <%= @topic.created_at.strftime("%d/%m/%Y") %></em></small>
+    <br>
+    <% if policy(@topic).edit? %>
+      <%= link_to 'Modifier', edit_topic_path(@topic), class: "btn btn-primary" %>
+    <% end %>
+    <% if policy(@topic).destroy? %>
+      <%= link_to 'Supprimer', topic_path(@topic), method: :delete, data: { confirm: 'Etes-vous sûr de vouloir supprimer ce topic ?' }, class: "btn btn-primary" %>
+    <% end %>
+    <p class="text-justify mt-5"><%= @topic.description %></p>
+  </div>
+
+  <div class="text-left row mb-5">
+    <h2 class="ml-3">Les commentaires</h2>
+    <% if @messages.empty? %>
+      <p><em>Aucun commentaire</em></p>
+    <% else %>
+      <% @messages.each do |message| %>
+        <div class="col-12 border p-3 ml-3">
+          <small><em><%= message.user.nickname %> - le <%= message.created_at.strftime("%d/%m/%Y") %></em></small>
+          <% if policy(message).edit? %>
+            <%= link_to 'Modifier', edit_message_path(message), class: "btn btn-primary ml-3" %>
+          <% end %>
+          <% if policy(message).destroy? %>
+            <%= link_to 'Supprimer', message_path(message), method: :delete, data: { confirm: 'Etes-vous sûr de vouloir supprimer ce message ?' }, class: "btn btn-primary ml-3" %>
+          <% end %>
+          <p class="p-0"><%= message.content %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if policy(:message).new? %>
+    <div class="border p-3 mb-5">
+      <%= simple_form_for(@message) do |f| %>
+        <%= f.input :content,
+                    required: true,
+                    label: 'Votre commentaire' %>
+        <%= f.hidden_field :topic_id, value: @topic.id %>
+        <%= f.submit 'Envoyer', class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

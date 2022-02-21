@@ -1,7 +1,7 @@
 <div class="container">
   <!-- link back -->
   <p class="mt-5">
-    <%= link_to home_path, class: "btn btn-primary" do %>
+    <%= link_to root_path, class: "btn btn-primary" do %>
       <i class="fas fa-chevron-left"></i> Retour
     <% end %>
   </p>
@@ -23,6 +23,18 @@
           <% end %>
 
           <div class="form-inputs">
+            <%= f.input :first_name,
+                        required: true,
+                        label: 'Mon prénom',
+                        input_html: { autocomplete: 'first_name' } %>
+            <%= f.input :last_name,
+                        required: true,
+                        label: 'Mon nom',
+                        input_html: { autocomplete: 'last_name' } %>
+            <%= f.input :nickname,
+                        required: true,
+                        label: 'Mon pseudo',
+                        input_html: { autocomplete: 'nickname' } %>
             <%= f.input :email,
                         required: true,
                         label: 'Mon email',

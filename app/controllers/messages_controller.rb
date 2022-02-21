@@ -1,12 +1,8 @@
 class MessagesController < ApplicationController
   before_action :find_message, only: [:edit, :update, :destroy]
 
-  def new
-    @message = Message.new
-  end
-
   def create
-    @message = Message.new(message_params)
+    @message = authorize Message.new(message_params)
     @message.user = current_user
 
     if @message.save
@@ -20,7 +16,7 @@ class MessagesController < ApplicationController
 
   def update
     if @message.update(message_params)
-      redirect_to topic_path(@message.topic), notice: 'Votre message intitulé a bien été modifié.'
+      redirect_to topic_path(@message.topic), notice: 'Votre message a bien été modifié.'
     else
       render :edit
     end

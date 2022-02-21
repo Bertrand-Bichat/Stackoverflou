@@ -1,2 +1,14 @@
-<h1>Messages#edit</h1>
-<p>Find me in app/views/messages/edit.html.erb</p>
+<div class="container mb-5">
+  <p class="mt-5">
+    <%= link_to topic_path(@message.topic), class: "btn btn-primary" do %>
+      <i class="fas fa-chevron-left"></i> Retour
+    <% end %>
+  </p>
+  <h1 class="text-center my-5">Modifier un message</h1>
+  <%= simple_form_for(@message) do |f| %>
+    <%= f.input :content,
+                required: true,
+                label: 'Votre commentaire' %>
+    <%= f.submit 'Modifier', class: "btn btn-primary" %>
+  <% end %>
+</div>

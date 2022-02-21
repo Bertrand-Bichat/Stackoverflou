@@ -1,13 +1,16 @@
 <div class="container">
-  <h1 class="text-center my-5">Les Topics</h1>
+  <h1 class="text-center mt-5">Les Topics</h1>
+  <% if policy(:topic).new? %>
+    <%= link_to '+ Nouveau topic', new_topic_path, class: "btn btn-primary text-center w-100 my-3" %>
+  <% end %>
 
-  <div class="row">
+  <div class="row text-center mb-5">
     <% @topics.each do |topic| %>
-      <%= link_to topic_path(topic) do %>
-        <div class="col-12 col-md-6 col-lg-3 border p-2">
-          <h2 class="text-center mb-3"><%= topic.title %></h2>
-          <p><%= topic.description %></p>
-        </div>
+      <%= link_to topic_path(topic), class: "col-12 col-md-6 col-lg-3 border p-3 my-3" do %>
+        <h2 class="mb-3"><%= topic.title %></h2>
+        <small class="text-grey"><%= topic.user.nickname %></small>
+        <br>
+        <small class="text-grey">topic créé le <%= topic.created_at.strftime("%d/%m/%Y") %></small>
       <% end %>
     <% end %>
   </div>

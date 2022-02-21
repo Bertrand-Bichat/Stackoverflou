@@ -1,2 +1,9 @@
-<h1>Topics#new</h1>
-<p>Find me in app/views/topics/new.html.erb</p>
+<div class="container mb-5">
+  <p class="mt-5">
+    <%= link_to topics_path, class: "btn btn-primary" do %>
+      <i class="fas fa-chevron-left"></i> Retour
+    <% end %>
+  </p>
+  <h1 class="text-center my-5">Créer un nouveau topic</h1>
+  <%= render 'form', topic: @topic %>
+</div>
