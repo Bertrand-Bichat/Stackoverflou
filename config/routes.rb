@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
-  root to: 'pages#home'
-
   resources :topics
   resources :messages, only: [:new, :create, :edit, :update, :destroy]
+  root to: 'topics#index'
 end

@@ -1,3 +1,14 @@
 <div class="container">
   <h1 class="text-center my-5">Les Topics</h1>
+
+  <div class="row">
+    <% @topics.each do |topic| %>
+      <%= link_to topic_path(topic) do %>
+        <div class="col-12 col-md-6 col-lg-3 border p-2">
+          <h2 class="text-center mb-3"><%= topic.title %></h2>
+          <p><%= topic.description %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
